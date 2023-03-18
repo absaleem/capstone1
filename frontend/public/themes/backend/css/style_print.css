@@ -1,0 +1,302 @@
+body {
+	margin: 0;
+	padding: 10px;
+	font-size: 16.0pt;
+    font-weight: 700;
+	font-family: calibri, sans-serif;
+	font-style: italic;
+	line-height: 28px;
+}
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.container_access {
+	width: 98%;
+	padding: 0px 1%;
+	background: #97F83E;
+}
+.container_haz {
+	width: 98%;
+	padding: 0px 1%;
+	background: #ffc000;
+}
+.container_hot {
+	width: 98%;
+	padding: 0px 1%;
+	background: #ff0000;
+}
+h3 {
+	font-size: 22px;
+	font-family: calibri, sans-serif;
+	font-style: normal;
+	margin: 0;
+	padding: 0;
+}
+h5 {
+	font-size: 18px;
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+header .flex {
+	align-items: center;
+}
+.split.logo {
+	margin: 10px 0px 0px;
+}
+.logo img {
+    width: 100%;
+    height: auto !important;
+}
+.split h3 {
+	margin-left: 10px;
+}
+.split h5 {
+	font-size: 14px;
+}
+.split {
+	width: 10%;
+}
+.split.small {
+	width: 5%;
+}
+.split.large {
+	width: 14%;
+}
+.split .form-control {
+	background: #fff;
+	width: 94%;
+	height: 60px;
+	line-height: 60px;
+	border: 0;
+	padding: 0px 3%;
+	border: 1px solid #000;
+}
+.half {
+	width: 48%
+}
+
+.main_form {
+	margin: 30px 0px 0px;
+}
+.title {
+	background: #fff;
+	color: #000;
+	padding: 10px;
+	border: 1px solid #000;
+}
+.title h3 {
+	margin: 0;
+}
+.form-group {
+	margin: 10px 0px;
+}
+.form-group label {
+	font-size: 18px;
+}
+.form-group input {
+	background: #fff;
+	width: 98%;
+	height: 40px;
+	padding: 0 1%;
+	margin: 5px 0px;
+	border: 1px solid #000;
+}
+.dates_part {
+	width: 100%;
+}
+.dates_sec {
+	width: 56%;
+}
+.times_sec {
+	width: 40%;
+}
+.start {
+	width: 50%;
+}
+.finish {
+	width: 50%;
+}
+.height-100 {
+	height: 100px !important;
+}
+
+.check-box {
+	background: #fff;
+}
+.check {
+	width: 60px;
+	text-align: center;
+	border: 1px solid #000;
+}
+.check-text {
+	width: 100%;
+	text-align: left;
+	border: 1px solid #000;
+	padding-left: 2%;
+}
+.check-text label {
+	font-size: 13.0pt;
+	font-style: italic;
+	font-weight: normal;
+}
+.mt-20 {
+	margin-top: 20px;
+}
+.approval .form-control {
+	height: 180px;
+}
+.approval .date {
+	width: 35%;
+}
+.approval .name {
+	width: 60%;
+}
+.approval .sign {
+	width: 60%;
+}
+.pad-10 {
+	padding: 1%;
+}
+.sign .form-control {
+	height: 120px;
+}
+.bg-grey {
+	background: #BFBFBF;
+	padding: 10px;
+}
+.bg-grey .title {
+	border: 0;
+	background-color: transparent;
+	text-align: center;
+	color: #f20000;
+}
+.s_date {
+	width: 10%;
+	background: #fff;
+	height: 40px;
+	line-height: 40px;
+	padding: 0px 5px;
+	border: 1px solid #000;
+}
+.date_box {
+	width: 35%;
+}
+.date_box input {
+	background: #fff;
+	width: 100%;
+	height: 40px;
+	border: 1px solid #000;
+}
+.cname {
+	width: 14%;
+	background: #fff;
+	padding-left: 5px;
+	padding-top: 5px;
+	border: 1px solid #000;
+	font-size: 12pt;
+}
+.cname_box {
+	width: 34%;
+}
+.cname_box input {
+	background: #fff;
+	width: 98%;
+	padding-left: 2%;
+	height: 40px;
+	border: 1px solid #000;
+}
+.left_checks {
+	width: 49.8%;
+}
+.checks {
+	width: 99%;
+	background: #fff;
+}
+.w100 {
+	width: 100%;
+}
+.checks-box {
+	width: 14%;
+	background: #fff;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #000;
+}
+.checks_text {
+	width: 100%;
+	background: #fff;
+	border: 1px solid #000;
+	padding-left: 1%;
+}
+.checks_text label {
+	font-size: 13.0pt;
+	font-style: italic;
+	font-weight: normal;
+}
+.right_checks {
+	width: 50.2%;
+}
+.bottom {
+	margin-top: 0px;
+}
+.bottom .cname {
+	width: 28%;
+	height: 142px;
+	padding-left: 5px;
+	line-height: 40px;
+	padding-top: 0;
+}
+.bottom .cname_box {
+	width: 68%;
+}
+.bottom .cname_box input {
+	height: 142px;
+}
+.stage-5 .form-control {
+	width: 98%;
+	height: 120px;
+}
+.stage-5 .signa {
+	width: 46%;
+}
+.stage-5 .date {
+	width: 46%;
+}
+.sbt_btn {
+	width: 240px;
+	height: 40px;
+	text-align: center;
+	text-transform: uppercase;
+	color: #fff;
+	background: #000;
+	border-radius: 30px;
+	border: 0;
+	font-size: 18px;
+	margin: 50px auto 0px;
+	display: block;
+	cursor: pointer;
+}
+.sbt_btn:hover {
+	background: #333;
+}
+.signature {
+    width: 100%;
+    height: 100px;
+    background: #fff;
+    border: 1px solid #000;
+}
+.signature img {
+    width: auto;
+    height: 100px!important;
+}
+.stage-5 .signature {
+    height: 120px;
+    margin:5px 0px;
+}
+.right_checks .signature {
+    height: 149px;
+}

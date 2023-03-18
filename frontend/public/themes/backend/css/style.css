@@ -1,0 +1,90 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+.logo  {
+	margin: 30px auto;
+	width: auto;
+	display: table;
+}
+.formpart {
+	margin: 0px 0px 30px 0px;
+	border: 2px dashed #333;
+	padding: 10px;
+}
+.formpart form {
+	margin-bottom: 0;
+}
+.formpart h3 {
+	font-size: 26px;
+	margin: 0px 0px 10px 0px;
+	background: #26a69a;
+	padding: 10px;
+	text-align: center;
+	color: #fff;
+}
+.formpart .col {
+	margin: 15px 0px;
+}
+.formpart label {
+	font-size: 18px;
+	color: #666;
+	font-weight: bold;
+}
+::placeholder {
+	color: #333;
+}
+.highlights {
+	background: #26a69a;
+	padding: 5px 10px;
+}
+.highlights p {
+	margin: 0;
+	color: #fff;
+	font-size: 20px;
+}
+.spec_txt {
+	margin-left: 10px;
+	font-size: 20px;
+}
+.spec_txt p {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-weight: bold;
+}
+.submit_btn {
+	background: #333;
+	color: #fff;
+	width: 160px;
+	height: 50px;
+	margin: 0 auto;
+	display: block;
+}
+
+
+@media (min-width: 801px) and (max-width: 1024px) {
+	.container {
+		width: 90% !important;
+	}
+}
+@media only screen and (max-width: 700px) {
+	.formpart h3 {
+		font-size: 22px;
+	}
+	.formpart label {
+		font-size: 15px;
+		font-weight: bold;
+	}
+	.highlights p {
+		font-size: 15px;
+	}
+}
+
+.haz-works h3 {
+	background: #ffc000;
+	color: #000;
+}
+.hot-works h3 {
+	background: #ff0000;
+	color: #fff;
+}
