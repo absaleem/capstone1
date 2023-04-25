@@ -45,17 +45,19 @@ function Product(){
     e.preventDefault();
   
     const errorkeys=Object.keys(formData).filter((key)=>{
-      if(formData[key] === "" && key!='error'){
+      if(formData[key] === "" && key!=='error'){
         return key;
       }
+        return false;
     });
+    
     if(errorkeys.length>0){
       toast('pls fill all the fields');
     }else{
       setLoading(true);
       try {
 
-       const response=await axios.post("http://localhost:3001/Catalog/createProduct",{"product_details":{
+       const response=await axios.post("https://item-catalog-webservice.onrender.com/Catalog/createProduct",{"product_details":{
         brand_id:formData.brand_id,
         product_name: formData.product_name,
         product_description: html_editor1, 
@@ -86,7 +88,7 @@ function Product(){
         async function getData(){
           setLoading(true);
             try {  
-            const response=await axios.get("http://localhost:3001/Catalog/listProduct");
+            const response=await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listProduct");
             setUserdata(response.data);  
             }catch(error){
             }
@@ -96,7 +98,7 @@ function Product(){
         async function getBrand(){
           setLoading(true);
             try {  
-            const response=await axios.get("http://localhost:3001/Catalog/listBrand");
+            const response=await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listBrand");
             setBranddata(response.data);  
             }catch(error){
             }
@@ -108,7 +110,7 @@ function Product(){
       const listDatas= async function getData(){
         setLoading(true);
           try {  
-          const response=await axios.get("http://localhost:3001/Catalog/listProduct");
+          const response=await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listProduct");
           setUserdata(response.data); 
          
           }catch(error){
@@ -117,13 +119,13 @@ function Product(){
       }
      
       const handleProceed = (id,status) => {
-        if(status==1){  navigate(`/admin/Productedit/${id}`); }else{  }
+        if(status===1){  navigate(`/admin/Productedit/${id}`); }else{  }
       };
     
       async function onDeleteData(id){
         setLoading(true);
         try {
-        const response = await axios.delete(`http://localhost:3001/Catalog/deleteProduct/${id}`);
+        const response = await axios.delete(`https://item-catalog-webservice.onrender.com/Catalog/deleteProduct/${id}`);
         toast(response.data.msg);    
         listDatas();
         }catch(error){

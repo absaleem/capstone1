@@ -15,11 +15,6 @@ function Myaccount(){
   if(!user_token){
     navigate('/');
   }
- 
-  const handleLogout = () => {
-      localStorage.removeItem("user_token"); 
-       navigate('/')
-   }
 
     let formValues={
         user_name:"",
@@ -60,10 +55,11 @@ function Myaccount(){
      e.preventDefault();
    
      const errorkeys=Object.keys(formData).filter((key)=>{
-       if(formData[key] === "" && key!='error'){
-         return key;
-       }
-     });
+      if(formData[key] === "" && key!=='error'){
+        return key;
+      }
+        return false;
+    });
  
      if(errorkeys.length>0){
        toast('pls fill all the fields');   
@@ -71,7 +67,7 @@ function Myaccount(){
       toast('Password and Confirm Password doesnt match');   
     }else{
       async function getData(rowId){
-        const response = await axios.get(`http://localhost:3001/Catalog/user/getUser/${rowId}`);
+        const response = await axios.get(`https://item-catalog-webservice.onrender.com/Catalog/user/getUser/${rowId}`);
         const response1 = response.data.user_details;
         setFormdata({...formData,
                 id:response1._id,
@@ -89,7 +85,7 @@ function Myaccount(){
     
     
       try {
-        const response=await axios.put(`http://localhost:3001/Catalog/user/updateUser/${formData.id}`,{
+        const response=await axios.put(`https://item-catalog-webservice.onrender.com/Catalog/user/updateUser/${formData.id}`,{
         user_details:{
           user_name:formData.user_name,
           mobile_number:formData.mobile_number,
@@ -122,7 +118,7 @@ function Myaccount(){
     }
     try{
   async function getData(rowId){
-      const response = await axios.get(`http://localhost:3001/Catalog/user/getUser/${rowId}`);
+      const response = await axios.get(`https://item-catalog-webservice.onrender.com/Catalog/user/getUser/${rowId}`);
       const response1 = response.data.user_details;
       setFormdata({...formData,
               id:response1._id,
@@ -145,7 +141,7 @@ function Myaccount(){
     try{
   
         async function checKTokenexists(rowId){
-          const response = await axios.get(`http://localhost:3001/Catalog/user/checKTokenexists/${rowId}`);
+          const response = await axios.get(`https://item-catalog-webservice.onrender.com/Catalog/user/checKTokenexists/${rowId}`);
           console.log(response.data);
          }     
          checKTokenexists(localStorage.getItem("user_token"));//call user data when loading the file

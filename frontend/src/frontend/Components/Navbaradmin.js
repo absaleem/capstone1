@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, Link, useNavigate, Outlet, } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Navbaradmin(){
     let url="";

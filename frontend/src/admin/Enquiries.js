@@ -3,8 +3,6 @@ import Footeradmin from "../frontend/Components/Footeradmin";
 import Navbaradmin from "../frontend/Components/Navbaradmin";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 function Enquiries(){
@@ -21,7 +19,7 @@ function Enquiries(){
 
         async function getData(){
             try {  
-            const response=await axios.get("http://localhost:3001/Catalog/admin/enquiry/listEnquiries");
+            const response=await axios.get("https://item-catalog-webservice.onrender.com/Catalog/admin/enquiry/listEnquiries");
             console.log(response);
             setUserdata(response.data);  
             }catch(error){

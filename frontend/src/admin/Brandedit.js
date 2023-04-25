@@ -34,23 +34,22 @@ function Brandedit(){
     setFormdata({...formData, [e.target.name]:e.target.value, error});
   }
   const [formData,setFormdata]=useState(formValues); 
-  const [loading, setLoading] = useState(true);
-
+  
   const handleSubmit= async (e)=>{
     e.preventDefault();
   
     const errorkeys=Object.keys(formData).filter((key)=>{
-      if(formData[key] === "" && key!='error'){
+      if(formData[key] === "" && key!=='error'){
         return key;
       }
+        return false;
     });
 
     if(errorkeys.length>0){
       alert('pls fill all the fields');
     }else{
-      setLoading(true);
       try {
-        const response=await axios.put(`http://localhost:3001/Catalog/updateBrand/${formData.id}`,{
+        const response=await axios.put(`https://item-catalog-webservice.onrender.com/Catalog/updateBrand/${formData.id}`,{
         brand_details:{
             brand_name:formData.brand_name,
             brand_image:formData.brand_image,
@@ -66,15 +65,13 @@ function Brandedit(){
     }catch(error){
   
     }
-    setLoading(false);
     } 
   }
 
   useEffect(() => {
-    setLoading(true);
     try{
   async function getData(rowId){
-      const response = await axios.get(`http://localhost:3001/Catalog/getBrand/${rowId}`);
+      const response = await axios.get(`https://item-catalog-webservice.onrender.com/Catalog/getBrand/${rowId}`);
       const response1 = response.data.brand_details;
       setFormdata({...formData,
               id:response1._id,
@@ -88,7 +85,6 @@ function Brandedit(){
   
     }
     
-  setLoading(false);
   },[]);
        
         

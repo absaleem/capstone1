@@ -1,18 +1,15 @@
 import React,{useState,useEffect} from "react";
-import { Link,useNavigate,useParams } from 'react-router-dom';
 import axios from "axios";
 
 function Navbar(){
     let url="";
 
     const [brandList, setBrandOptions] = useState([]);
-    const navigate = useNavigate();
-    const params = useParams();
-   
+    
     useEffect(() => {
 
         async function getBrands(){
-            const listBranddata= await axios.get("http://localhost:3001/Catalog/listBrand");
+            const listBranddata= await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listBrand");
             let brand_data= listBranddata.data.sort(function(a, b){
               if(a.brand_name < b.brand_name) { return -1; }
               if(a.brand_name > b.brand_name) { return 1; }
@@ -22,12 +19,7 @@ function Navbar(){
         }        
         getBrands();
         },[]);
-        
-       const handlesSubmitmenu =(id)=>{
-        navigate(`/Products/${id}`);
-       }
-   
-        
+            
     return( 
     <>
     <div className="container-fluid bg-dark mb-30">

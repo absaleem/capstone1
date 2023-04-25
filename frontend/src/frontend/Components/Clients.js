@@ -1,15 +1,14 @@
 import React,{useState,useEffect} from "react";
-import { Link,useNavigate,useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 function Clients(){
-    let url="";
     const [brandList, setBrandOptions] = useState([]);
    
     useEffect(() => {
 
         async function getBrand(){
-            const listBranddata= await axios.get("http://localhost:3001/Catalog/listBrand");
+            const listBranddata= await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listBrand");
             setBrandOptions(listBranddata.data);
         }        
         getBrand();
@@ -24,7 +23,7 @@ function Clients(){
         { brandList.length > 0 && brandList.map((brand_item) => (
                        
             <div className="col-lg-3 col-md-4 col-sm-6 pb-1" key={brand_item._id}>
-                <a className="text-decoration-none" href="">
+                <a className="text-decoration-none" href={"/"}>
                     <div className="cat-item d-flex align-items-center mb-4">
                         <div className="overflow-hidden" style={{width:"100px",height:"100px"}}>
                         <Link to={ `/Products/${brand_item._id}` }><img className="img-fluid" src={brand_item.brand_image} alt=""/></Link>

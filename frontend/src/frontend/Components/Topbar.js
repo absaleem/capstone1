@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
-import { Link,useNavigate,useParams } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 function Topbar(){
-   let url="http://localhost:3000/";
+   let url="https://delightful-alfajores-20cc05.netlify.app";
    
    const navigate = useNavigate();
    const user_token = localStorage.getItem("user_token");
@@ -14,23 +14,31 @@ function Topbar(){
    //const [searchElement, setSearchElement] = useState('')
 
    useEffect(() => {
-    async function getProductlist(){
-        try {  
-        const response_products=await axios.get("http://localhost:3001/Catalog/listProduct");
-        
-        response_products.data.length>0 && response_products.data.map((item)=>{
-                   setProductsearch(items => [...items, {'id':item.product_id,'name':item.product_name }]);
-           });
-        }catch(error){
-        }
-    }
+    async function getProductlist() {
+      try {
+        let data = [];
+        const response_products = await axios.get(
+          "https://item-catalog-webservice.onrender.com/Catalog/listProduct"
+        );
+
+        response_products.data.length > 0 &&
+          response_products.data.map((item) => {
+            let obj = {
+              id: item._id,
+              name: item.product_name,
+            };
+            data.push(obj);
+          });
+        setProductsearch(data);
+      } catch (error) {}
+    }   
       getProductlist(); 
 },[]);
 
 const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
     // the string searched and for the second the results.
-    var str=string; console.log(str);
+    //var str=string; //console.log(str);
     //console.log(string, results);
 
     //setSearchElement(string);
@@ -50,10 +58,7 @@ const handleOnSearch = (string, results) => {
   const handleOnFocus = () => {
    // console.log('Focused')
       }
-  const removeDuplicateObjectFromArray = (array, key) => {
-      var check = new Set();
-      return array.filter(obj => !check.has(obj[key]) && check.add(obj[key]));
-    }
+
   const formatResult = (items) => {
     return (
       <>
@@ -71,11 +76,6 @@ const handleOnSearch = (string, results) => {
         <div className="row bg-secondary py-1 px-xl-5">
             <div className="col-lg-6 d-none d-lg-block">
                 <div className="d-inline-flex align-items-center h-100">
-              {/*   <a href={url} className="text-body mr-3">About</a>
-                    <a href={url} className="text-body mr-3" >Contact</a>
-                    <a href={url} className="text-body mr-3" >Help</a>
-                    <a href={url} className="text-body mr-3" >FAQs</a>
-             */}
                 </div>
             </div>
             <div className="col-lg-6 text-center text-lg-right">
@@ -87,13 +87,13 @@ const handleOnSearch = (string, results) => {
                     user_token? <Link to={ `/Myaccount/${user_id}` }  className="text-body mr-3">My account</Link> : ""
                }
                {
-                    user_token? "" :  <Link to="/Register"><a className="text-body mr-3">Register</a></Link> 
+                    user_token? "" :  <Link to="/Register"  className="text-body mr-3">Register</Link> 
                }
                {
-                    user_token? "" :  <Link to="/Login"><a className="text-body mr-3">Login</a></Link> 
+                    user_token? "" :  <Link to="/Login" className="text-body mr-3">Login</Link> 
                }
                {
-                    user_token? <Link onClick={handleLogout}><a className="text-body mr-3">Logout</a></Link> : ""
+                    user_token? <Link onClick={handleLogout} className="text-body mr-3">Logout</Link> : ""
                }   
                    {/* <div className="btn-group">
                         <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
@@ -155,7 +155,6 @@ const handleOnSearch = (string, results) => {
                     </div>
                     <div className="input-group-append">
                             <span className="input-group-text bg-transparent text-primary">
-                                <i className="fa fa-search"></i>
                             </span>
                         </div>
                     </div> 

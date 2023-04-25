@@ -38,7 +38,7 @@ function Subcategory(){
   const [loading, setLoading] = useState(true);
 
   async function getCategory(){
-    const listCategorydata= await axios.get("http://localhost:3001/Catalog/listCategory");
+    const listCategorydata= await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listCategory");
     let category_data= listCategorydata.data.sort(function(a, b){
       if(a.category_name < b.category_name) { return -1; }
       if(a.category_name > b.category_name) { return 1; }
@@ -51,9 +51,10 @@ function Subcategory(){
     e.preventDefault();
   
     const errorkeys=Object.keys(formData).filter((key)=>{
-      if(formData[key] === "" && key!='error'){
+      if(formData[key] === "" && key!=='error'){
         return key;
       }
+        return false;
     });
 
     if(errorkeys.length>0){
@@ -61,7 +62,7 @@ function Subcategory(){
     }else{
       setLoading(true);
       try {
-       const response=await axios.post("http://localhost:3001/Catalog/createSubcategory",{"sub_category_details":{
+       const response=await axios.post("https://item-catalog-webservice.onrender.com/Catalog/createSubcategory",{"sub_category_details":{
         category_id: formData.category_id,
         sub_category_name: formData.sub_category_name,
       }
@@ -84,7 +85,7 @@ function Subcategory(){
         async function getData(){
           setLoading(true);
             try {  
-            const response=await axios.get("http://localhost:3001/Catalog/listSubcategory");
+            const response=await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listSubcategory");
             setUserdata(response.data);  
             }catch(error){
             }
@@ -98,7 +99,7 @@ function Subcategory(){
       const listDatas= async function getData(){
         setLoading(true);
           try {  
-          const response=await axios.get("http://localhost:3001/Catalog/listSubcategory");
+          const response=await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listSubcategory");
           setUserdata(response.data); 
          
           }catch(error){
@@ -107,13 +108,13 @@ function Subcategory(){
       }
      
       const handleProceed = (id,status) => {
-        if(status==1){  navigate(`/admin/Subcategoryedit/${id}`); }else{  }
+        if(status===1){  navigate(`/admin/Subcategoryedit/${id}`); }else{  }
       };
     
       async function onDeleteData(id){
         setLoading(true);
         try {
-        const response = await axios.delete(`http://localhost:3001/Catalog/deleteSubcategory/${id}`);
+        const response = await axios.delete(`https://item-catalog-webservice.onrender.com/Catalog/deleteSubcategory/${id}`);
         toast(response.data.msg);    
         listDatas();
         }catch(error){

@@ -3,7 +3,7 @@ import Footer from "./Components/Footer"
 import Navbar from "./Components/Navbar";
 import Topbar from "./Components/Topbar";
 import axios from "axios";
-import { Link, useNavigate,useParams } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,8 +18,7 @@ function Forgotpassword(){
        const token=params.token;  setFormdata({...formData, password_token:token}); //console.log(token); console.log(formData);
        async function getData(token){
           try{
-           var res= await axios.get(`http://localhost:3001/Catalog/user/checKTokenexists/${token}`); 
-           console.log(res);
+           var res= await axios.get(`https://item-catalog-webservice.onrender.com/Catalog/user/checKTokenexists/${token}`); 
           }
           catch(error){
            toast('Password link expired'); 
@@ -29,7 +28,7 @@ function Forgotpassword(){
           } 
        }    
        
-           var res=  getData(token);//call user data when loading the file   
+        getData(token);//call user data when loading the file   
       
     },[]);
     
@@ -41,7 +40,7 @@ function Forgotpassword(){
      e.preventDefault();
    
        try {
-         const response = await axios.post("http://localhost:3001/Catalog/user/resetPassword",{...formData});
+         const response = await axios.post("https://item-catalog-webservice.onrender.com/Catalog/user/resetPassword",{...formData});
          if(response){
                toast(response.data.msg); 
                setTimeout(() => {

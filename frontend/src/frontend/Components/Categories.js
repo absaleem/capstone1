@@ -11,7 +11,7 @@ function Categories(){
     useEffect(() => {
 
         async function getCategory(){
-            const listCategorydata= await axios.get("http://localhost:3001/Catalog/listCategory");
+            const listCategorydata= await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listCategory");
           setCategoryOptions(listCategorydata);
         }        
         getCategory();

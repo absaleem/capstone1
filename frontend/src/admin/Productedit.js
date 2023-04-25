@@ -27,9 +27,7 @@ function Productedit(){
   }
 
   const [formData,setFormdata]=useState(formValues); 
-  const [userdata,setUserdata]=useState([]);
   const [brandList,setBranddata]=useState([]);
-  const [loading, setLoading] = useState(true);
   const [html_editor, setHtml] = useState('');
   const [html_editor1, setHtml1] = useState('');
 
@@ -47,18 +45,18 @@ function Productedit(){
     e.preventDefault();
   
     const errorkeys=Object.keys(formData).filter((key)=>{
-      if(formData[key] === "" && key!='error'){
+      if(formData[key] === "" && key!=='error'){
         return key;
       }
+        return false;
     });
     
     if(errorkeys.length>0){
       toast('pls fill all the fields');
     }else{
-      setLoading(true);
       try {
 
-        const response=await axios.put(`http://localhost:3001/Catalog/updateProduct/${formData.id}`,{
+        const response=await axios.put(`https://item-catalog-webservice.onrender.com/Catalog/updateProduct/${formData.id}`,{
           product_details:{
             brand_id:formData.brand_id,
             product_name: formData.product_name,
@@ -73,12 +71,10 @@ function Productedit(){
         navigate('/admin/Product');
         }, 2000);   
       
-      listDatas();
-    
+      
     }catch(error){
   
     }
-    setLoading(false);
     } 
   }
   function onChangeeditor(e) {
@@ -89,28 +85,17 @@ function Productedit(){
   }
    useEffect(() => {
 
-        async function getData(){
-          setLoading(true);
-            try {  
-            const response=await axios.get("http://localhost:3001/Catalog/listProduct");
-            setUserdata(response.data);  
-            }catch(error){
-            }
-         setLoading(false);
-        }
-
+    
         async function getBrand(){
-          setLoading(true);
             try {  
-            const response=await axios.get("http://localhost:3001/Catalog/listBrand");
+            const response=await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listBrand");
             setBranddata(response.data);  
             }catch(error){
             }
-         setLoading(false);
         }
 
         async function getData(rowId){
-          const response = await axios.get(`http://localhost:3001/Catalog/getProduct/${rowId}`);
+          const response = await axios.get(`https://item-catalog-webservice.onrender.com/Catalog/getProduct/${rowId}`);
           const response1 = response.data.product_details;
           setHtml(response1.product_specification);
           setHtml1(response1.product_description);
@@ -125,22 +110,7 @@ function Productedit(){
         getData(params.id);//call user data when loading the file           
         getBrand();//call user data when loading the file
         },[]);
-        
-      const listDatas= async function getData(){
-        setLoading(true);
-          try {  
-          const response=await axios.get("http://localhost:3001/Catalog/listProduct");
-          setUserdata(response.data); 
-         
-          }catch(error){
-          }
-          setLoading(false);
-      }
-     
-      const handleProceed = (id,status) => {
-        if(status==1){  navigate(`/admin/Productedit/${id}`); }else{  }
-      };
-        
+   
     return (
         <>
         <Navbaradmin/>

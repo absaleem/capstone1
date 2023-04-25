@@ -5,25 +5,22 @@ import Navbar from "./Components/Navbar";
 import Topbar from './Components/Topbar';
 
 import axios from "axios";
-import { Link,useNavigate,useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Products(){
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const params = useParams();
   
   const [productList,setProductdata]=useState([]);
   const [subcategoryList, setSubcategoryOptions] = useState([]);
   const [radioList,setRadiodata]=useState([]);
-  const [avg_review, setAveragereview]=useState();
-  const [product_review_count, setProductreviewcount]=useState();
+  //const [avg_review, setAveragereview]=useState();
+  //const [product_review_count, setProductreviewcount]=useState();
   
 
-  const handlesSubmit =(id)=>{
-        navigate(`/Productdetail/${id}`);
-    }
     const handleChangeradio=(e,cat_id,sub_cat_id)=>{
         const { value, checked } = e.target;
         let array = [...radioList];
@@ -50,7 +47,7 @@ function Products(){
           toast('Pls select Atleast a filter');
         }else{
           try {    
-            const response=await axios.post("http://localhost:3001/Catalog/searchbySubcategory",{"search_details":{
+            const response=await axios.post("https://item-catalog-webservice.onrender.com/Catalog/searchbySubcategory",{"search_details":{
               sub_cat_id: radioList.toString(),
             }});
          setProductdata(response.data);  
@@ -67,30 +64,30 @@ function Products(){
        useEffect(() => {
         async function getProductlist(){
             try {  
-            const response=await axios.get("http://localhost:3001/Catalog/listProduct");
+            const response=await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listProduct");
             setProductdata(response.data);  
             }catch(error){
             }
         }
         async function getData(brand_id){
             try {  
-            const response=await axios.get(`http://localhost:3001/Catalog/getBrandproducts/${brand_id}`);
+            const response=await axios.get(`https://item-catalog-webservice.onrender.com/Catalog/getBrandproducts/${brand_id}`);
             const response1 = response.data;
             setProductdata(response1[0]);  
-            setAveragereview(response1[1][0].ratingAvg); 
-            setProductreviewcount(response1[1][0]); 
+            //setAveragereview(response1[1][0].ratingAvg); 
+            //setProductreviewcount(response1[1][0]); 
             }catch(error){
             }
         }   
         
         async function getSubcategory(){
-          var arr=Array(); var cat_id=''; //var arr1=Array();
+          var arr=Array(); var cat_id=''; var arr1=[];
             try {  
-            const response_list=await axios.get("http://localhost:3001/Catalog/getSubcategorybycategory");
+            const response_list=await axios.get("https://item-catalog-webservice.onrender.com/Catalog/getSubcategorybycategory");
             var count_cat=0;
             for(var i=0;i<response_list.data.length;i++){
                 
-                if(response_list.data[i].category_id!=cat_id){
+                if(response_list.data[i].category_id!==cat_id){
                   var arr1=Array();
                   arr1.push({'sub_category_id':response_list.data[i]._id,'sub_category_name':response_list.data[i].sub_category_name,'category_id':response_list.data[i].category_id });
                   count_cat=count_cat+1;
@@ -99,7 +96,7 @@ function Products(){
                 }
                 arr[count_cat]=[{'category_id':response_list.data[i].category_id,'category_name':response_list.data[i].category.category_name,sub_category_details:arr1}]
                 
-                var cat_id=response_list.data[i].category_id;
+                cat_id=response_list.data[i].category_id;
               }
             
             }catch(error){
@@ -124,7 +121,7 @@ function Products(){
         <div className="row px-xl-5">
             <div className="col-12">
                 <nav className="breadcrumb bg-light mb-30">
-                    <a className="breadcrumb-item text-dark" href="#">Home</a>
+                    <a className="breadcrumb-item text-dark" href={"/"}>Home</a>
                     <span className="breadcrumb-item active">Product</span>
                 </nav>
             </div>
@@ -158,32 +155,6 @@ function Products(){
             </div>
             <div className="col-lg-9 col-md-8">
                 <div className="row pb-3">
-                   {/*<div className="col-12 pb-1">
-                        <div className="d-flex align-items-center justify-content-between mb-4">
-                            <div>
-                                <button className="btn btn-sm btn-light"><i className="fa fa-th-large"></i></button>
-                                <button className="btn btn-sm btn-light ml-2"><i className="fa fa-bars"></i></button>
-                            </div>
-                            <div className="ml-2">
-                                <div className="btn-group">
-                                    <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
-                                    <div className="dropdown-menu dropdown-menu-right">
-                                        <a className="dropdown-item" href="#">Latest</a>
-                                        <a className="dropdown-item" href="#">Popularity</a>
-                                        <a className="dropdown-item" href="#">Best Rating</a>
-                                    </div>
-                                </div>
-                                <div className="btn-group ml-2">
-                                    <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
-                                    <div className="dropdown-menu dropdown-menu-right">
-                                        <a className="dropdown-item" href="#">10</a>
-                                        <a className="dropdown-item" href="#">20</a>
-                                        <a className="dropdown-item" href="#">30</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
                      {
                      (productList.length>0)?
                         productList.map((row) => (   
@@ -193,7 +164,6 @@ function Products(){
                             <div className="product-img position-relative overflow-hidden">
                                 <img className="img-fluid w-100" style={{height:"300px",width:"300px"}} src={row.product_image} alt={row.product_name}/>
                                 <div className="product-action">
-                                   {/*<a onClick={()=>handlesSubmit(row._id)} className="btn btn-outline-dark btn-square"><i className="far fa-heart"></i></a>*/}
                                     <a href={ `/Productdetail/${row._id}`}  className="btn btn-outline-dark btn-square"><i className="fa fa-search"></i></a>
                                 </div>
                             </div>
@@ -202,32 +172,22 @@ function Products(){
                                 <div className="d-flex align-items-center justify-content-center mt-2">
                                     <h5>${row.product_discount_price}</h5><h6 className="text-muted ml-2"><del>${row.product_price}</del></h6>
                                 </div>
-                                <div className="d-flex align-items-center justify-content-center mb-1">
+                               {/*<div className="d-flex align-items-center justify-content-center mb-1">
                                              { avg_review && avg_review?"":"No Reviews Yet"}
                                              { avg_review>0 && avg_review?(<small className="fa fa-star text-primary mr-1"></small> ):""}
                                              { avg_review>1 && avg_review?(<small className="fa fa-star text-primary mr-1"></small> ):""}
                                              { avg_review>2 && avg_review?(<small className="fa fa-star text-primary mr-1"></small> ):""}
                                              { avg_review>3 && avg_review?(<small className="fa fa-star text-primary mr-1"></small> ):""}
                                              { avg_review>4 && avg_review?(<small className="fa fa-star text-primary mr-1"></small> ):""}
-                                             &nbsp;<small>(99)</small>
-                                </div>
+                                             &nbsp;<small>({avg_review})</small>
+                                </div>*/}
                             </div>
                         </div>
                     </div>
                         )):<div className="col-12 justify-content-center"><h5>Item not found</h5></div>
                     }
                   
-                    {/*<div className="col-12">
-                        <nav>
-                          <ul className="pagination justify-content-center">
-                            <li className="page-item disabled"><a className="page-link" href="#">Previous</a></li>
-                            <li className="page-item active"><a className="page-link" href="#">1</a></li>
-                            <li className="page-item"><a className="page-link" href="#">2</a></li>
-                            <li className="page-item"><a className="page-link" href="#">3</a></li>
-                            <li className="page-item"><a className="page-link" href="#">Next</a></li>
-                          </ul>
-                        </nav>
-                       </div>*/}
+                  
                 </div>
             </div>       
           </div>  

@@ -13,7 +13,7 @@ function Homepage(){
     <Navbar/>
     <Carousel/>
     <Clients/>
-    {<Featuredproducts/>}
+    <Featuredproducts/>
     <Footer/>
     </> 
     );

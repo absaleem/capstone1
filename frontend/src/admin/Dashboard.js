@@ -14,26 +14,14 @@ function Dashboard(){
     if(!admin_token){
         navigate('/admin');
     }
- 
 
-   let formValues={
-    brand_name: "",
-    brand_image: "",
-    error:{
-      brand_name: "",
-      brand_image: "",
-    }
-  }
-
-  const [formData,setFormdata]=useState(formValues); 
   const [userdata,setUserdata]=useState([]);
  
-
    useEffect(() => {
 
         async function getData(){
             try {  
-            const response=await axios.get("http://localhost:3001/Catalog/listBrand");
+            const response=await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listBrand");
             setUserdata(response.data);  
             }catch(error){
             }
@@ -42,9 +30,9 @@ function Dashboard(){
         getData();//call user data when loading the file
         },[]);
         
-      const listDatas= async function getData(){
+      const listDatas= async function getData1(){
           try {  
-          const response=await axios.get("http://localhost:3001/Catalog/listBrand");
+          const response=await axios.get("https://item-catalog-webservice.onrender.com/Catalog/listBrand");
           setUserdata(response.data); 
          
           }catch(error){
@@ -52,12 +40,12 @@ function Dashboard(){
       }
      
       const handleProceed = (id,status) => {
-        if(status==1){  navigate(`/admin/Brandedit/${id}`); }else{  }
+        if(status===1){  navigate(`/admin/Brandedit/${id}`); }else{  }
       };
     
       async function onDeleteData(id){
         try {
-        const response = await axios.delete(`http://localhost:3001/Catalog/deleteBrand/${id}`);
+        const response = await axios.delete(`https://item-catalog-webservice.onrender.com/Catalog/deleteBrand/${id}`);
         toast(response.data.msg);    
         listDatas();
         }catch(error){
@@ -73,7 +61,7 @@ function Dashboard(){
     <div className="container-fluid">
         <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4"><span className="bg-secondary pr-3">List Brand</span></h2>
         <div className="row px-xl-5">
-       
+        <div><ToastContainer /></div>
          
   <table className="table table-bordered bg-light" id="dataTable" style={{width:"100%",cellSpacing:"0"}}>  
    <thead>
@@ -88,7 +76,7 @@ function Dashboard(){
          userdata.map((row) => (   
        <tr key={row._id}>
        <td>{row.brand_name}</td>
-       <td><img src={row.brand_image} style={{ width:'100px',height:'100px'}}/></td>
+       <td><img alt="{'img'}" src={row.brand_image} style={{ width:'100px',height:'100px'}}/></td>
        <td>
           <button className="btn btn-primary btn-sm" style={{margin:"2px"}}  onClick={(e)=>handleProceed(row._id,1)}><i className="fas fa-edit"></i></button>&nbsp;<br/>
           <button className="btn btn-primary btn-sm" style={{margin:"2px"}} onClick={()=>onDeleteData(row._id)}><i className="fas fa-trash"></i></button>

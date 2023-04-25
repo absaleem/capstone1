@@ -65,6 +65,46 @@ module.exports.signup=async (req,res,next)=>{
          
           //save in DB  
           responseInserted = await mongo.selectedDB.collection("users").insertOne({...req.body});
+                    
+                    var transporter = nodemailer.createTransport({
+                        host: 'smtp.gmail.com',
+                        port: 465,
+                        secure: true,
+                        auth: {
+                            type: 'OAuth2',
+                            user: 'saleem.mcstn@gmail.com',
+                            clientId: '756870982380-rjrgcr23apf7bb30r5pgm40ii7ebe4av.apps.googleusercontent.com',
+                            clientSecret: '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',
+                            refreshToken: '1//04vZoxOg5nbcRCgYIARAAGAQSNgF-L9Ir8lUshFntuX2i8Wj1piFThpaT4y9mVYIvAAS6EXkqk_A5hfA7k_krhIxG16eDJWXYxw',
+                            accessToken: 'ya29.a0Ael9sCO7Owwyb0xzmacg_1150t5jvfG0KzZ1_FYMzpzVdimTMe9CL85jEtxMLIu7Q4KvnpAHbcxDXGwcHS_4fpxwUC50sBbnHAQ3uOAqrhz91WRILnkCIvcnO-D5zcy7bEn4kKUYF8JHOMRp3P_qwkXDtrbiaCgYKAQwSARISFQF4udJh3YZMp57U0HwBnVsFvytzFQ0163',
+                            }
+                    });
+                    
+                    
+                    var mail = {
+                        from: "<info@itemcatalogue.com>Item Catalogue Welcome User",
+                        to: req.body.email,
+                        subject: "Guvi Item Catalog User Registration",
+                        //text: "Dear "+req.body.user_name+", Thank you for registering with Item Catalogue. This message is to inform you that your account registration has been completed. We hope you enjoy the various services available on our website.Should you have any questions or comments, please contact at +012 345 6789",
+                        html: "<b><img src='https://email.uplers.com/blog/wp-content/uploads/2017/08/ThankYou-Email-Engagement-Thumbnail.jpg' /><p>Dear "+req.body.user_name+",</p><p><br/>Thank you for registering with Item Catalogue. This message is to inform you that your account registration has been completed. We hope you enjoy the various services available on our website.</p><p>Should you have any questions or comments, please contact at +012 345 6789</p> <p><br/>Best Regards,<br/>Support Team,<br/>Item Catalogue,<br/>GUVI</p></b>",
+                    }
+    
+                  const mail_sent =  transporter.sendMail(mail, function(err, info) {
+                        if (err) {
+                           // console.log(err);
+                        } else {
+                            // see https://nodemailer.com/usage
+                           // console.log("info.messageId: " + info.messageId);
+                           // console.log("info.envelope: " + info.envelope);
+                           // console.log("info.accepted: " + info.accepted);
+                           // console.log("info.rejected: " + info.rejected);
+                          //  console.log("info.pending: " + info.pending);
+                          //  console.log("info.response: " + info.response);
+                        }
+                        transporter.close();
+                    });
+                    
+                                                         
           return  res.status(200).send({"msg":"Thanks for registering with us"});
       }catch(error){
           console.error(error);
@@ -98,7 +138,7 @@ module.exports.signin=async (req,res,next)=>{
       }
     };
 
-    module.exports.checkUser=async (req,res,next)=>{
+module.exports.checkUser=async (req,res,next)=>{
     
         function toISOStringLocal(d) {
             function z(n){return (n<10?'0':'') + n}
@@ -147,27 +187,27 @@ module.exports.signin=async (req,res,next)=>{
                 );
               
      
-                    var transporter = nodemailer.createTransport({
+                              var transporter = nodemailer.createTransport({
                         host: 'smtp.gmail.com',
                         port: 465,
                         secure: true,
                         auth: {
                             type: 'OAuth2',
                             user: 'saleem.mcstn@gmail.com',
-                            clientId: '802969667608-jrvc1tso1bfcik3tmr9sddo8blavpf2n.apps.googleusercontent.com',
-                            clientSecret: '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',
-                            refreshToken: '1//043eA_7ZtJk3jCgYIARAAGAQSNgF-L9IrMmsSv9_j_Ap0MAVM_8S5U2hj4fNvDHYmxKTq0JoScuFK30VbmQ5Gd018RGfI1TbCtw',
-                            accessToken: 'ya29.a0AeTM1iddrdOOhZZ9tjfVkgECu_HNdtHB5ZZSa1awh-ytWXZF5b46kdhFBF_YW8kJc8_GVDuKIPG7ft5bJZWhY-UWL6jkW-q3J8clFe6eCtGchJUDW5Vc9dTg2nZ_ReDk23O1AvI-9widNJJBdqoprICCpsYxaCgYKAZ8SARISFQHWtWOmeuQyz5KgKuZTMt3Q58yxUg0163',
+                            clientId: '756870982380-rjrgcr23apf7bb30r5pgm40ii7ebe4av.apps.googleusercontent.com',
+                            clientSecret: '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',
+                            refreshToken: '1//04vZoxOg5nbcRCgYIARAAGAQSNgF-L9Ir8lUshFntuX2i8Wj1piFThpaT4y9mVYIvAAS6EXkqk_A5hfA7k_krhIxG16eDJWXYxw',
+                            accessToken: 'ya29.a0Ael9sCO7Owwyb0xzmacg_1150t5jvfG0KzZ1_FYMzpzVdimTMe9CL85jEtxMLIu7Q4KvnpAHbcxDXGwcHS_4fpxwUC50sBbnHAQ3uOAqrhz91WRILnkCIvcnO-D5zcy7bEn4kKUYF8JHOMRp3P_qwkXDtrbiaCgYKAQwSARISFQF4udJh3YZMp57U0HwBnVsFvytzFQ0163',
                             }
                     });
                     
                     
                     var mail = {
-                        from: "test@gmail.com",
-                        to: "saleem.mcstn@gmail.com",
-                        subject: "Guvi Forgot Password",
-                        text: "Following is the link to reset your password,\n http://localhost:3000/Catalog/Resetpassword/"+encoded_token,
-                        html: "<p>Following is the link to reset your password,</p><p>http://localhost:3000/Catalog/Resetpassword/"+encoded_token+"</p> <p>Best Regards,</p><p>Support Team,</p><p>Guvi</p>",
+                        from: "<info@itemcatalogue.com>Item Catalogue Forgot Password",
+                        to: alreadyexists.email,
+                        subject: "Guvi Item Catalog Forgot Password",
+                        html: "<b><img src='https://media.istockphoto.com/id/1433523465/vector/the-man-forgot-her-personal-data-the-concept-of-a-web-screensaver-with-a-forgotten-password.jpg?s=612x612&w=0&k=20&c=GcLv47vXtzmi13gdXUPs0fqqmkFWd2sBS-lutdbYRJk=' /><p>Dear "+alreadyexists.user_name+",<p>Following is the link to reset your password,</p><p>http://localhost:3000/Resetpassword/"+encoded_token+"</p><p>Should you have any questions or comments, please contact at +012 345 6789</p> <p><br/>Best Regards,<br/>Support Team,<br/>Item Catalogue,<br/>GUVI</p></b>",
+                     
                     }
     
                   const mail_sent =  transporter.sendMail(mail, function(err, info) {
@@ -183,9 +223,8 @@ module.exports.signin=async (req,res,next)=>{
                           //  console.log("info.response: " + info.response);
                         }
                         transporter.close();
-                    });
-                    
-    
+                    }); 
+                
                 res.send({"msg":"Email has been sent with the reset password link. Thank you"});
         
           }catch(error){

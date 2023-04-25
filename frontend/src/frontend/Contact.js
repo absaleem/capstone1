@@ -1,19 +1,14 @@
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import Topbar from './Components/Topbar';
 
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Contact(){
-
-  const navigate = useNavigate();
-  
-  
+function Contact(){  
    let formValues={
     user_name: "",
     email_id: "",
@@ -42,16 +37,17 @@ function Contact(){
     e.preventDefault();
   
     const errorkeys=Object.keys(formData).filter((key)=>{
-      if(formData[key] === "" && key!='error'){
+      if(formData[key] === "" && key!=='error'){
         return key;
       }
+        return false;
     });
 
     if(errorkeys.length>0){
       toast('pls fill all the fields');
     }else{
       try {
-       const response=await axios.post("http://localhost:3001/Catalog/admin/enquiry/createEnquiry",{"enquiry_details":{
+       const response=await axios.post("https://item-catalog-webservice.onrender.com/Catalog/admin/enquiry/createEnquiry",{"enquiry_details":{
         user_name: formData.user_name,
         email_id: FormData.email_id,
         subject: formData.subject,
@@ -76,7 +72,7 @@ function Contact(){
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <a class="breadcrumb-item text-dark" href={"/"}>Home</a>
                     <span class="breadcrumb-item active">Contact</span>
                 </nav>
             </div>
@@ -118,7 +114,7 @@ function Contact(){
             </div>
             <div class="col-lg-5 mb-5">
                 <div class="bg-light p-30 mb-30">
-                    <iframe style={{width:"100%",height:"250px",border:"0"}}  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+                    <iframe title="iframe-address" style={{width:"100%",height:"250px",border:"0"}}  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
                     frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
                 <div class="bg-light p-30 mb-3">

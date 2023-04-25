@@ -42,6 +42,43 @@ module.exports.listFeaturedsettings=async(req,res,next)=>{
               }, {
                 $unwind:"$products"
                  },
+                 {
+                 $lookup: {
+                  from: "product_price",
+                  localField: "home_featured_products",
+                  foreignField: "product_id",
+                  as: "productsprice"
+                 }
+                }, 
+                 {
+                $unwind:"$productsprice"
+                 },
+                 {   
+                  $project:{
+                      _id: 1,
+                      product_id: "$products._id",
+                      product_name: "$products.product_name",
+                      product_image: "$productsprice.product_image",
+                  },
+              }, 
+        ]).toArray();
+        res.send(listFeaturedsettings);
+        }catch(error){ 
+            res.status(500).send(error);
+        }
+        
+    /*try{
+        listFeaturedsettings = await mongo.selectedDB.collection("settings").aggregate([
+              {
+                $lookup: {
+                  from: "product",
+                  localField: "home_featured_products",
+                  foreignField: "_id",
+                  as: "products"
+                }
+              }, {
+                $unwind:"$products"
+                 },
                  {   
                   $project:{
                       _id: 1,
@@ -53,7 +90,7 @@ module.exports.listFeaturedsettings=async(req,res,next)=>{
         res.send(listFeaturedsettings);
         }catch(error){ 
             res.status(500).send(error);
-        }
+        }*/
 };
 
 module.exports.updateSettings=async (req,res,next)=>{

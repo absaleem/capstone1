@@ -18,7 +18,6 @@ import Users from './admin/Users';
 
 import Homepage from './frontend/Homepage';
 import Contactpage from './frontend/Contact';
-import Searchproduct from './frontend/Searchproduct';
 import Register from './frontend/Register'
 import Login from './frontend/Login';
 import Forgotpassword from './frontend/Forgotpassword';
@@ -41,7 +40,6 @@ function App() {
               <Route path='/Myaccount/:id' element={<Myaccount/>} />
               <Route path="/contact" element={<Contactpage/>} />    
               <Route path="/Products/:id" element={<Products/>} />    
-              <Route path="/Searchproduct" element={<Searchproduct/>} />    
               <Route path="/Productdetail/:id" element={<Productdetail/>} />   
               <Route path="/admin/" element={<BackendLogin/>} />
               <Route path="/admin/Dashboard" element={<Dashboard/>} />
